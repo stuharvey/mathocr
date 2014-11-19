@@ -3,6 +3,7 @@
 			   beautiful
 
 	all it needs is threading'''
+import threading #|:)
 import cv2
 import numpy as np
 import datetime
@@ -47,7 +48,7 @@ class MotionTracker:
 		self.p0 = None
 		self.mask = None
 
-	def getTrackedFrame(self, new_frame):	
+	def getTrackedFrame(self, new_frame):
 		self.new_gray = cv2.cvtColor(new_frame, cv2.COLOR_BGR2GRAY)
 		self.p1, self.st, self.err = cv2.calcOpticalFlowPyrLK(self.old_gray, self.new_gray, self.p0, None, **self.lk_params)
 		self.good_new = self.p1[self.st == 1]
@@ -68,10 +69,12 @@ class MotionTracker:
 	
 	# return coordinates of the outer limits of the image to scan
 	def getBoundaries(self):
-		self.ab = np.array(self.ab)
+		'''self.ab = np.array(self.ab)
 		d = {'home_coords': self.ab}
 		neighborhood = pd.DataFrame(d)
-		'''for pt in self.ab:
+		for i in 1:len(ab):
+			neighborhood['friend %d']
+		for pt in self.ab:
 			self.friends = []
 			for friend in self.ab:
 				if not np.array_equal(friend[1:3],pt[1:3]): # don't be narcissistic
@@ -80,7 +83,7 @@ class MotionTracker:
 					if(friendzone): # <3
 						friends.append(friend[0])
 						
-		for pt in self.ab:'''
+		for pt in self.ab'''
 
 	def changeTracking(self, old_frame):
 		self.show_tracking = not self.show_tracking
@@ -135,7 +138,7 @@ class LiveDisplay:
 		elif key == ord('c'): # c centers window
 			cv2.moveWindow('Webcam', 100, 100)
 		elif key == ord('x'): # x raises window to top, scales
-			cv2.moveWindow('Webcam', 0,-1080)
+			cv2.moveWindow('Webcam', 1540,100)
 			cv2.resizeWindow('Webcam',1920,1080)
 		return DONT_CHANGE
 main()
